@@ -1,0 +1,46 @@
+# General
+alias ls='ls -Gla'
+alias ctar='tar -cvzf'
+alias xtar='tar -xvzf'
+alias lo='logout'
+alias ag='sudo apachectl graceful'
+alias ips="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\   -f2"
+alias ip='ifconfig en1 | grep -w inet'
+alias up='open -ga Transmit'
+trash() { 
+  /bin/mv -i ${*} ~/.Trash; 
+}
+
+# Rails
+alias serv='thin start -d; open http://localhost:3000; devlog'
+alias stopserv='thin stop'
+alias booster='thin start -d; mate .; open http://localhost:3000; devlog'
+alias s='serv'
+alias ss='stopserv'
+alias devlog='tail -f log/development.log'
+alias cdgems='cd /usr/lib/ruby/user-gems/1.8/gems/'
+
+# Screenwatcher
+# These don't work properly in 10.5
+# alias nw='launchctl unload ~/Library/LaunchAgents/com.postpostmodern.screenwatcher.plist; echo "***** Screenwatcher is OFF *****"'
+# alias sw='launchctl load ~/Library/LaunchAgents/com.postpostmodern.screenwatcher.plist; echo "***** Screenwatcher is ON *****"'
+
+# Git
+alias gst='git status'
+# alias gl='git pull'
+alias ga='git add'
+alias gp='git push'
+alias gd='git diff | mate'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gco='git checkout'
+alias glog='git log --pretty=format:"%n%ad : %an%n%s%n=====================================%n%b%n"'
+alias glt='glog --since=yesterday'
+alias gly='glog --since="2 days ago" --until="1 day ago"'
+
+# Get the custom aliases
+if [ -f ~/.dotfiles/bash/custom_aliases ]; then
+  . ~/.dotfiles/bash/custom_aliases
+fi

@@ -1,0 +1,15 @@
+[user]
+	name = Your Name
+	email = you@example.com
+[apply]
+	whitespace = nowarn
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[pager]
+	color = true
+[alias]
+	co = checkout
+[core]
+	excludesfile = "/_ABSOLUTE_PATH_TO_/.dotfiles/git/excludes"

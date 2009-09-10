@@ -1,0 +1,3 @@
+. ~/.dotfiles/bash/env
+. ~/.dotfiles/bash/prompt
+. ~/.dotfiles/bash/aliases
