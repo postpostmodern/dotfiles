@@ -1,4 +1,4 @@
-source /opt/local/share/doc/git-core/contrib/completion/git-completion.bash
+source /usr/local/git/contrib/completion/git-completion.bash
 
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"

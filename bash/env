@@ -2,7 +2,7 @@ export EDITOR="mate -w"
 export GIT_EDITOR="mate -w"
 
 export TERM=dtterm
-export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/local/autopano-sift/bin:$PATH
+export PATH=/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/local/autopano-sift/bin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export DISPLAY=:0.0
 export COPYFILE_DISABLE=true
