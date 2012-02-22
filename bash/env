@@ -1,8 +1,9 @@
 export EDITOR="mate -w"
-export GIT_EDITOR="mate -w"
+export GIT_EDITOR="mate -wl1"
 
+export JAVA_HOME=$(/usr/libexec/java_home)
 export TERM=dtterm
-export PATH=/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/usr/local/autopano-sift/bin:$PATH
+export PATH=$HOME/bin:$HOME/Scripts:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/opt/local/lib/postgresql84/bin:$AWS_IAM_HOME:/usr/local/flex_sdk/bin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export DISPLAY=:0.0
 export COPYFILE_DISABLE=true

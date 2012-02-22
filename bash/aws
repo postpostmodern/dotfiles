@@ -1,0 +1,2 @@
+export AWS_IAM_HOME=/usr/local/iam-cli/
+export AWS_CREDENTIAL_FILE=$HOME/.aws-key

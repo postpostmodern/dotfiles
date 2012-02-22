@@ -1,4 +1,4 @@
-source /usr/local/git/contrib/completion/git-completion.bash
+source /usr/local/etc/bash_completion.d/git-completion.bash
 
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
@@ -30,8 +30,14 @@ function proml {
 # $BLUE[$RED\$(date +%H:%M)$BLUE]\
 # $BLUE[$RED\u@\h:\w$GREEN\$(parse_git_branch)$BLUE]\
 # $GREEN\$ "
+
+# PS1="${TITLEBAR}\
+# $BLUE[$RED\$(date +%r)$BLUE]\
+# $BLUE $RED\w$BLUE\$(parse_git_branch)\
+# $GREEN: $NORMAL"
+
 PS1="${TITLEBAR}\
-$BLUE[$RED\$(date +%r)$BLUE]\
+$BLUE[$RED\$(~/.rvm/bin/rvm-prompt i v g s)$BLUE]\
 $BLUE $RED\w$BLUE\$(parse_git_branch)\
 $GREEN: $NORMAL"
 PS2='> '

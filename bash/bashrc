@@ -1,3 +1,5 @@
 . ~/.dotfiles/bash/env
+. ~/.dotfiles/bash/aws
 . ~/.dotfiles/bash/prompt
 . ~/.dotfiles/bash/aliases
+. ~/.dotfiles/bash/rvm

@@ -1,0 +1,14 @@
+fontName       = "Droid Sans Mono"
+fontSize       = 14
+showInvisibles = true
+softWrap       = false
+softTabs       = true
+tabSize        = 2
+
+windowTitle = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/jason\/Sites\/[\w-]+\/?(.*)|(.+))\z/${2:? – ${2/\/Users\/jason/~/}:${1/\A(?=.)/ – /}}/}"
+
+[ text.html ]
+softWrap = false
+
+[ themes/* ]
+softTabs      = false

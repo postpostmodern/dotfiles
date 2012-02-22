@@ -3,6 +3,7 @@ alias ls='ls -Gla'
 alias ctar='tar -cvzf'
 alias xtar='tar -xvzf'
 alias lo='logout'
+alias m='mate .'
 alias ag='sudo apachectl graceful'
 alias ips="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\   -f2"
 alias ip='ifconfig en1 | grep -w inet'
@@ -12,18 +13,18 @@ trash() {
 }
 
 # Rails
-alias serv='thin start -d; open http://localhost:3000; devlog'
-alias stopserv='thin stop'
-alias booster='thin start -d; mate .; open http://localhost:3000; devlog'
-alias s='serv'
-alias ss='stopserv'
 alias devlog='tail -f log/development.log'
-alias cdgems='cd /usr/lib/ruby/user-gems/1.8/gems/'
+alias be='bundle exec'
+alias r='bundle exec rails'
+alias c='pry -r ./config/environment'
+
+# Redis
+alias redis='sudo redis-server /usr/local/etc/redis.conf'
 
 # Screenwatcher
 # These don't work properly in 10.5
-# alias nw='launchctl unload ~/Library/LaunchAgents/com.postpostmodern.screenwatcher.plist; echo "***** Screenwatcher is OFF *****"'
-# alias sw='launchctl load ~/Library/LaunchAgents/com.postpostmodern.screenwatcher.plist; echo "***** Screenwatcher is ON *****"'
+alias nw='launchctl unload ~/Library/LaunchAgents/com.postpostmodern.Screenwatcher.plist; echo "***** Screenwatcher is OFF *****"'
+alias sw='launchctl load ~/Library/LaunchAgents/com.postpostmodern.Screenwatcher.plist; echo "***** Screenwatcher is ON *****"'
 
 # Git
 alias gst='git status'
