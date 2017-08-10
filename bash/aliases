@@ -4,27 +4,121 @@ alias ctar='tar -cvzf'
 alias xtar='tar -xvzf'
 alias lo='logout'
 alias m='mate .'
-alias ag='sudo apachectl graceful'
+alias ag='sudo /usr/sbin/apachectl graceful'
 alias ips="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | cut -d\   -f2"
 alias ip='ifconfig en1 | grep -w inet'
 alias up='open -ga Transmit'
-trash() { 
-  /bin/mv -i ${*} ~/.Trash; 
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder;'
+alias svgo='svgo --pretty --disable=removeXMLProcInst --enable=transformsWithOnePath'
+
+trash() {
+  /bin/mv -i ${*} ~/.Trash;
+}
+
+# C5 Web Sites
+
+alias c56perms="sudo chgrp -R _www \
+    public/blocks/ \
+    public/packages/ \
+    public/files/ \
+    public/config/ \
+    public/updates/ \
+  && sudo chmod -R g+w \
+    public/blocks/ \
+    public/packages/ \
+    public/files/ \
+    public/config/ \
+    public/updates/"
+
+alias c5perms="sudo chown -R jason:_www \
+    public/packages/ \
+    public/application/blocks/ \
+    public/application/files/ \
+    public/application/config/ \
+    public/updates/ \
+    public/application/languages \
+  && sudo chmod -R g+w \
+    public/packages/ \
+    public/application/blocks/ \
+    public/application/files/ \
+    public/application/config/ \
+    public/updates/ \
+    public/application/languages"
+
+c5cc() {
+  sudo ./public/concrete/bin/concrete5 c5:clear-cache;
+  echo -n "Resetting permissions... ";
+  c5perms;
+  echo -e "\033[32mdone.";
+}
+
+fetchdb() {
+  if [[ -z "$1" ]]
+  then
+    echo "Usage: fetchdb database_name";
+    return;
+  fi
+  ssh do-db "mysqldump $1 | gzip -9" | gzip -d | mysql -uroot -p $1;
+}
+
+dumpdb() {
+  if [[ -z "$1" ]]
+  then
+    echo "Usage: dumpdb database_name";
+    return;
+  fi
+  ssh do-db "mysqldump $1 | gzip -9" | gzip -d > ./$1-production-$(date '+%Y-%m-%d').sql;
+}
+
+fetchfiles() {
+  if [[ -z "$1" ]]
+  then
+    echo "Usage: fetchfiles example.com";
+    return;
+  fi
+  sudo rsync -avz --delete --exclude 'tmp/*' --exclude '/cache*' -e "ssh -p 7022" brandsmith@$1:/var/www/sites/$1/public/application/files/ ./public/application/files/;
+}
+
+fetchstagingfiles() {
+  if [[ -z "$2" ]]
+  then
+    echo "Usage: fetchstagingfiles server.com web_dir";
+    return;
+  fi
+  sudo rsync -avz --delete --exclude 'tmp/*' --exclude '/cache*' -e "ssh -p 7022" brandsmith@$1:/var/www/sites/$2/public/application/files/ ./public/application/files/;
+}
+
+fetchc5() {
+  if [[ -z "$2" ]]
+  then
+    echo "Usage: fetchc5 example.com database_name";
+    return;
+  fi
+  echo "Downloading files to ./public/application/files/...";
+  sudo rsync -avz --delete --exclude 'tmp/*' --exclude '/cache*' -e "ssh -p 7022" brandsmith@$1:/var/www/sites/$1/public/application/files/ ./public/application/files/;
+  echo -e "\n\033[32mdone.\033[0m";
+  echo -n "Fetching database...";
+  ssh do-db "mysqldump $2 | gzip -9" | gzip -d | mysql -uroot -p $2;
+  echo -e "\033[32mdone.\033[0m";
+  c5cc;
+  echo -e "\033[32mAll done!\033[0m";
 }
 
 # Rails
 alias devlog='tail -f log/development.log'
 alias be='bundle exec'
 alias r='bundle exec rails'
-alias c='pry -r ./config/environment'
+alias c='bundle exec pry -r ./config/environment'
 
 # Redis
 alias redis='sudo redis-server /usr/local/etc/redis.conf'
 
 # Screenwatcher
-# These don't work properly in 10.5
-alias nw='launchctl unload ~/Library/LaunchAgents/com.postpostmodern.Screenwatcher.plist; echo "***** Screenwatcher is OFF *****"'
-alias sw='launchctl load ~/Library/LaunchAgents/com.postpostmodern.Screenwatcher.plist; echo "***** Screenwatcher is ON *****"'
+alias nowatch='launchctl unload -w ~/Library/LaunchAgents/com.postpostmodern.Screenwatcher.plist && echo "***** Screenwatcher is OFF *****"'
+alias screenwatch='launchctl load -w ~/Library/LaunchAgents/com.postpostmodern.Screenwatcher.plist && echo "***** Screenwatcher is ON *****"'
+
+# YUI Compressor
+alias yui="java -jar $HOME/Jar/yuicompressor-2.4.7.jar -v"
 
 # Git
 alias gst='git status'
@@ -38,6 +132,7 @@ alias gb='git branch'
 alias gba='git branch -a'
 alias gco='git checkout'
 alias glog='git log --pretty=format:"%n%ad : %an%n%s%n=====================================%n%b%n"'
+alias glogshort='git log --pretty=format:"%ad : %an %s"'
 alias glt='glog --since=yesterday'
 alias gly='glog --since="2 days ago" --until="1 day ago"'
 

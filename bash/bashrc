@@ -1,5 +1,7 @@
 . ~/.dotfiles/bash/env
+. ~/.dotfiles/bash/config
 . ~/.dotfiles/bash/aws
 . ~/.dotfiles/bash/prompt
 . ~/.dotfiles/bash/aliases
 . ~/.dotfiles/bash/rvm
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
